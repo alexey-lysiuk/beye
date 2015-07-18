@@ -572,6 +572,7 @@ std::vector<std::string> JVM_Parser::jvm_read_pool(binary_stream& handle,size_t 
 			oss<<"Name&Type: "<<str<<" "<<str2;
 			break;
 	    case CONSTANT_UTF8:
+		{
 			sval=handle.read(type_word);
 			sval=JVM_WORD(&sval,1);
 			slen=std::min(sizeof(str)-1,size_t(sval));
@@ -582,6 +583,7 @@ std::vector<std::string> JVM_Parser::jvm_read_pool(binary_stream& handle,size_t 
 			stmp[slen]='\0';
 			oss<<"UTF8: "<<stmp;
 			break;
+		}
 	    default:
 			oss<<"Unknown: "<<utag;
 			i=nnames;
@@ -976,6 +978,7 @@ std::string JVM_Parser::bind(const DisMode& parent,__filesize_t ulShift,Bin_Form
 			str+=get_name(*pool_cache);
 			break;
 	    case CONSTANT_UTF8:
+		{
 			sval=pool_cache->read(type_word);
 			sval=JVM_WORD(&sval,1);
 			char stmp[sval+1];
@@ -983,6 +986,7 @@ std::string JVM_Parser::bind(const DisMode& parent,__filesize_t ulShift,Bin_Form
 			bp=pool_cache->read(sval); memcpy(stmp,bp.data(),bp.size());
 			str=stmp;
 			break;
+		}
 	    default:	break;
 	}
     }

@@ -17,7 +17,7 @@
 #ifndef __TSTRINGS__H
 #define __TSTRINGS__H
 
-#include "../version.h"
+#include "version.h"
 
 namespace	usr {
 /** @def BEYE_VERSION

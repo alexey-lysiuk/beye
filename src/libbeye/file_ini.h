@@ -41,7 +41,7 @@ namespace	usr {
 	    virtual std::string		get_next_string(std::string& original);
 
 	    virtual int			eof() const { return fs.eof(); }
-	    virtual bool		seek(__fileoff_t off,std::ios_base::seekdir origin) { return fs.seekg(off,origin); }
+	    virtual bool		seek(__fileoff_t off,std::ios_base::seekdir origin) { return !!fs.seekg(off,origin); }
 	    inline void			rewind_ini() { fs.seekg(0L,std::ios_base::beg); }
 	    inline bool			opened() const { return fs.is_open(); }
 	private:
