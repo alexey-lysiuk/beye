@@ -396,8 +396,8 @@ static unsigned long  __FASTCALL__ __FOPS_nowait(volatile unsigned *counter,char
       "	fstp	%%st(1)\n"
       "	fbld	8(%1)\n"
       "	fbstp	8(%1)\n"
-      "	fild	(%1)\n"
-      "	fistp	(%1)\n"
+      "	fildl	(%1)\n"
+      "	fistpl	(%1)\n"
       "	fldt	4(%1)\n"
       "	fstpt	4(%1)\n"
       "	fstp	%%st(1)\n"
@@ -436,8 +436,8 @@ static unsigned long  __FASTCALL__ __FOPS_nowait(volatile unsigned *counter,char
       "	fstp	%%st(1)\n"
       "	fyl2xp1\n"
       "	fstp	%%st(1)\n"
-      "	fild	(%1)\n"
-      "	fistp	(%1)"
+      "	fildl	(%1)\n"
+      "	fistpl	(%1)"
      ::"r"(counter),"r"(arr18bytes)
      :"st","st(1)","st(2)","st(3)");
      retval++;
