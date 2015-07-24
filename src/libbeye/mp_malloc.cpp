@@ -10,7 +10,9 @@ using namespace	usr;
 #include <stdio.h>
 #include <stdlib.h>
 #include <signal.h>
+#ifndef __APPLE__
 #include <malloc.h>
+#endif // __APPLE__
 #include <limits.h>
 #include <time.h>
 #include <unistd.h>
