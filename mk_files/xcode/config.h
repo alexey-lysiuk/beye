@@ -25,12 +25,12 @@
 #define HAVE_POPEN 1
 #define HAVE_PCLOSE 1
 #define HAVE_SYS_RESOURCE_H 1
-#define HAVE_MMAP 1
+#undef HAVE_MMAP
 #define HAVE_MPROTECT 1
 #undef HAVE_ENDIAN_H
 #undef HAVE_BYTESWAP_H
 #define HAVE_ICONV 1
-#define HAVE_MEMALIGN 1
+#undef HAVE_MEMALIGN
 #define HOST "i686-pc-linux-gnu"
 
 #ifndef HAVE_ENDIAN_H
