@@ -103,6 +103,7 @@
 		8A55BA711B5A8A96007C8A3D /* tw_class.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A3BA60F1B5A7A9D00B08B6D /* tw_class.cpp */; };
 		8A55BA721B5A8A96007C8A3D /* twindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A3BA6111B5A7A9D00B08B6D /* twindow.cpp */; };
 		8A55BA7B1B5A8B15007C8A3D /* cpu_info.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A3BA60E1B5A7A9D00B08B6D /* cpu_info.cpp */; };
+		8ABC63931B6274CC0070B76B /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8ABC63921B6274CC0070B76B /* libiconv.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -431,6 +432,7 @@
 		8A42CA6C1B623DFC00D85E1B /* libosdep.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libosdep.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A55BA661B5A8A5B007C8A3D /* libbeye.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libbeye.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A55BA771B5A8AAA007C8A3D /* libsysdep.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libsysdep.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8ABC63921B6274CC0070B76B /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -438,6 +440,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8ABC63931B6274CC0070B76B /* libiconv.dylib in Frameworks */,
 				8A42CA631B623D8000D85E1B /* libaddons.a in Frameworks */,
 				8A42CA641B623D8000D85E1B /* libplugins.a in Frameworks */,
 				8A42CA651B623D8000D85E1B /* libdisasm.a in Frameworks */,
@@ -454,6 +457,7 @@
 			isa = PBXGroup;
 			children = (
 				8A3BA69E1B5A845C00B08B6D /* Sources */,
+				8ABC63911B6274B60070B76B /* Dependencies */,
 				8A3BA4271B5A790C00B08B6D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -971,6 +975,14 @@
 				8A3BA6A01B5A846C00B08B6D /* version.h */,
 			);
 			name = Sources;
+			sourceTree = "<group>";
+		};
+		8ABC63911B6274B60070B76B /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				8ABC63921B6274CC0070B76B /* libiconv.dylib */,
+			);
+			name = Dependencies;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1495,7 +1507,6 @@
 		8A42CA6E1B623DFC00D85E1B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				EXECUTABLE_PREFIX = lib;
@@ -1512,7 +1523,6 @@
 		8A42CA6F1B623DFC00D85E1B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				EXECUTABLE_PREFIX = lib;
@@ -1633,6 +1643,7 @@
 				8A42CA6F1B623DFC00D85E1B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8A55BA691B5A8A5B007C8A3D /* Build configuration list for PBXNativeTarget "beye" */ = {
 			isa = XCConfigurationList;
