@@ -82,7 +82,7 @@ static char *vtmp;
 static int out_fd;
 static int _color[8] = {0,4,2,6,1,5,3,7};
 
-static unsigned char frames_vt100[0x30] =
+static unsigned char frames_vt100[] =
 "aaaxuuukkuxkjjjkmvwtqnttmlvwtqnvvwwmmllnnjlaaaaa";
 
 #define twrite(x)	write(out_fd,(x),strlen(x))
@@ -111,7 +111,7 @@ static char *__FASTCALL__ _2ansi(unsigned char attr)
     return vtmp;
 }
 
-static unsigned char frames_dumb[0x30] =
+static unsigned char frames_dumb[] =
 ": %|{+++++|+++++`++}-++++++++-+++++++++++++#%[]~";
 
 /*
@@ -182,13 +182,13 @@ void __FASTCALL__ __vioReadBuff(tAbsCoord x, tAbsCoord y, tvioBuff *buff, unsign
 void __FASTCALL__ __vioWriteBuff(tAbsCoord x, tAbsCoord y, const tvioBuff *buff, unsigned len)
 {
     unsigned i;
-    unsigned char c;
+    char c;
     unsigned char *addr;
     tAbsCoord xx, yy;
 #define	LEN(x) (x << 4)
-    unsigned char mode = 0, old_mode = -1;
-    unsigned char cache_pb[LEN(VMAX_X)];
-    unsigned char *dpb,*pb = len > VMAX_X ? new char [LEN(len)] : cache_pb;
+    char mode = 0, old_mode = -1;
+    char cache_pb[LEN(VMAX_X)];
+    char *dpb,*pb = len > VMAX_X ? new char [LEN(len)] : cache_pb;
     unsigned slen;
 
     dpb=pb;
@@ -222,7 +222,7 @@ void __FASTCALL__ __vioWriteBuff(tAbsCoord x, tAbsCoord y, const tvioBuff *buff,
 
 	if (output_7) c &= 0x7f;
 	else {
-	    char *map = mode ? "\016" : "\017";
+	    const char *map = mode ? "\016" : "\017";
 	    if (old_mode != mode)
 	    {
 		strcpy(dpb,map);
@@ -235,7 +235,7 @@ void __FASTCALL__ __vioWriteBuff(tAbsCoord x, tAbsCoord y, const tvioBuff *buff,
 	/* TODO: make sure that compiler produces right order of conditions! */
 	if ((i && ca != buff->attrs[i - 1]) || i == len || !i)
 	{
-	    unsigned char *d;
+	    char *d;
 	    d = _2ansi(ca);
 	    strcpy(dpb, d);
 	    dpb += strlen(d);

@@ -67,6 +67,7 @@ static const termdesc termtab[] = {
 { (unsigned char*)"xterm",	TERM_XTERM },
 { (unsigned char*)"xterm-color", TERM_XTERM},
 { (unsigned char*)"color-xterm", TERM_XTERM},
+{ (unsigned char*)"xterm-256color", TERM_XTERM },
 { (unsigned char*)"beterm",	TERM_XTERM },
 { (unsigned char*)"vt100",	TERM_VT100 },
 { (unsigned char*)"ansi",	TERM_ANSI  },

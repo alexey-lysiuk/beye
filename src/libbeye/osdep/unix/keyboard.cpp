@@ -25,6 +25,7 @@ using namespace	usr;
     $Id: keyboard.c,v 1.9 2009/09/20 13:43:37 nickols_k Exp $
 */
 #include <iostream>
+#include <sstream>
 #include <stdexcept>
 
 #ifndef lint
@@ -42,7 +43,7 @@ static const char rcs_id[] = "$Id: keyboard.c,v 1.9 2009/09/20 13:43:37 nickols_
 
 char rawkb_buf[100];
 unsigned rawkb_len; /* length of rawkb_buf*/
-unsigned rawkb_size; /* size of rawkb_buf elements 1,2 or 4*/
+//unsigned rawkb_size; /* size of rawkb_buf elements 1,2 or 4*/
 unsigned rawkb_mode=0;
 int rawkb_escape;
 
@@ -55,11 +56,12 @@ static int is_unicode=0;
 #include <termios.h>
 #include <unistd.h>
 #include <sys/time.h>
-char *rawkb_name="VT100";
+const char *rawkb_name="VT100";
 unsigned rawkb_size=sizeof(char); /* size of rawkb_buf elements 1,2 or 4*/
 int rawkb_method=1;
 #ifndef STDIN_FILENO
 #define STDIN_FILENO 0
+#endif
 
 static int in_fd;
 static struct termios sattr;
@@ -217,7 +219,7 @@ static void __FASTCALL__ pushEvent(unsigned _event)
     unsigned event=_event;
 #if defined (HAVE_ICONV)
     if(is_unicode) {
-	static unsigned char utf_buff[8];
+	static char utf_buff[8];
 	static unsigned utf_ptr=0;
 	char *destb;
 	int err;
@@ -234,7 +236,7 @@ static void __FASTCALL__ pushEvent(unsigned _event)
 	    destb=nls_recode2screen_cp(nls_handle,utf_buff,&len);
 	    event=0;
 	    eptr=(unsigned char *)&event;
-	    for(i=0;i<min(sizeof(unsigned),len);i++) {
+	    for(i=0;i<std::min(sizeof(unsigned),size_t(len));i++) {
 		event<<=8;
 		eptr[0]=destb[i];
 	    }
@@ -259,7 +261,7 @@ static void __FASTCALL__ pushEvent(unsigned _event)
     ReadNextEvent is non-blocking call
 */
 
-void __FASTCALL__ ReadNextEvent()
+void ReadNextEvent()
 {
     unsigned key = 0;
 
@@ -385,7 +387,7 @@ place_key:
 #undef ret
 }
 
-inline int __FASTCALL__ __kbdGetShiftsKey()
+int __FASTCALL__ __kbdGetShiftsKey()
 {
     return shift_status;
 }
@@ -450,7 +452,7 @@ void __FASTCALL__ __init_keyboard(const char *user_cp)
     struct termios tattr;
 
 #ifdef	__ENABLE_SIGIO
-#define _MODE_ O_NONBLOCK | O_ASYNC
+#define _MODE_ (O_NONBLOCK | O_ASYNC)
 #else
 #define _MODE_ O_NONBLOCK
 #endif
@@ -498,7 +500,7 @@ void __FASTCALL__ __init_keyboard(const char *user_cp)
 
 #ifdef	__ENABLE_SIGIO
     /* everything is ready, start to receive SIGIO */
-    signal(SIGIO, (any_t*)(int) ReadNextEvent);
+    signal(SIGIO, (void (*)(int))ReadNextEvent);
 #endif
 
 }
