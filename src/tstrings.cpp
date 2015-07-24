@@ -22,9 +22,9 @@ using namespace	usr;
 namespace	usr {
 const char* BEYE_VERSION=VERSION;
 #if defined(__WIN32__) && defined(_MSC_VER)
-const char* BEYE_VER_MSG=" Binary EYE v "VERSION"-i386.Win32 Build: " __DATE__ " ";
+const char* BEYE_VER_MSG=" Binary EYE v " VERSION "-i386.Win32 Build: " __DATE__ " ";
 #else
-const char* BEYE_VER_MSG=" Binary EYE v "VERSION"-"HOST" Build: "__DATE__" ";
+const char* BEYE_VER_MSG=" Binary EYE v " VERSION "-" HOST " Build: " __DATE__ " ";
 #endif
 
 const char msgAboutText[] =
